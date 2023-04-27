@@ -7,37 +7,43 @@
 
 def bubble_count(a_list):
     """
-    Sort a list using bubble sort and count the number of comparisons and exchanges made.
+    Sorts a list using Bubble Sort and returns a tuple containing the number of comparisons and exchanges made.
     """
-    n = len(a_list)
     comparisons = 0
     exchanges = 0
-    for i in range(n):
-        for k in range(n - i - 1):
+    n = len(a_list)
+
+    for i in range(n - 1):
+        for k in range(n - 1 - i):
             comparisons += 1
             if a_list[k] > a_list[k + 1]:
-                exchanges += 1
                 a_list[k], a_list[k + 1] = a_list[k + 1], a_list[k]
+                exchanges += 1
+
     return comparisons, exchanges
 
 
 def insertion_count(a_list):
     """
-    Sort a list using insertion sort and count the number of comparisons and exchanges made.
+    Sorts a list using Insertion Sort and returns a tuple containing the number of comparisons and exchanges made.
     """
-    n = len(a_list)
     comparisons = 0
     exchanges = 0
-    for i in range(1, n):
-        value = a_list[i]
-        pos = i - 1
-        while pos >= 0 and a_list[pos] > value:
-            comparisons += 1
-            a_list[pos + 1] = a_list[pos]
-            pos -= 1
-            if pos >= 0 and a_list[pos] > value:
-                exchanges += 1
-        comparisons += 1
-        a_list[pos + 1] = value
-    return comparisons, exchanges
+    n = len(a_list)
 
+    for index in range(1, n):
+        value = a_list[index]
+        pos = index - 1
+
+        while pos >= 0:
+            comparisons += 1
+            if a_list[pos] > value:
+                a_list[pos + 1] = a_list[pos]
+                exchanges += 1
+                pos -= 1
+            else:
+                break
+
+        a_list[pos + 1] = value
+
+    return comparisons, exchanges
